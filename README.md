@@ -1,2 +1,2 @@
 # Kodenym
-Kodenym.com Play codenames online!
+http://Kodenym.com Play codenames online!
