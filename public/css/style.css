@@ -1,0 +1,146 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif; }
+
+html {
+  font-size: 8px; }
+  @media (min-width: 40em) {
+    html {
+      font-size: 12px; } }
+  @media (min-width: 64em) {
+    html {
+      font-size: 16px; } }
+
+html, body, #MainContainer {
+  height: 100%;
+  width: 100%; }
+
+#MainContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #9bc0c5; }
+  #MainContainer.red {
+    background-color: #ffcece; }
+  #MainContainer.blue {
+    background-color: #ceceff; }
+  #MainContainer button {
+    border: none;
+    padding: .2em .5em;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    font-variant: small-caps;
+    font-size: 1em; }
+  #MainContainer a {
+    color: inherit; }
+
+#Header {
+  display: none;
+  padding: .5rem;
+  font-size: 1rem; }
+  #Header > div {
+    flex: 1;
+    display: flex;
+    align-items: center; }
+  #Header .title {
+    text-align: center;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    padding-right: 1em; }
+  #Header .score {
+    justify-content: center; }
+    #Header .score .scoreNumber {
+      font-weight: 600; }
+      #Header .score .scoreNumber#RedLeft {
+        color: #FF4056; }
+      #Header .score .scoreNumber#BlueLeft {
+        color: #4040FF; }
+  #Header #GameIdTitle {
+    padding: 0px 1rem;
+    font-size: 1.2em;
+    text-transform: uppercase; }
+  #Header .right {
+    justify-content: flex-end; }
+
+#Body {
+  flex: 1;
+  display: flex;
+  flex-direction: column; }
+  #Body .row {
+    flex: 1;
+    display: flex; }
+    #Body .row .tile {
+      flex: 1;
+      margin: .5rem;
+      background-color: #FFE1B0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      border-radius: .5rem;
+      cursor: pointer; }
+      #Body .row .tile[data-status='turned'] {
+        color: #FFF; }
+        #Body .row .tile[data-status='turned'].red {
+          background-color: #FF4056; }
+        #Body .row .tile[data-status='turned'].blue {
+          background-color: #4040FF; }
+        #Body .row .tile[data-status='turned'].tan {
+          background-color: #FFA65B; }
+        #Body .row .tile[data-status='turned'].black {
+          background-color: #000000; }
+  #Body.colorsVisible .tile {
+    color: #fff; }
+    #Body.colorsVisible .tile[data-status='turned'] {
+      opacity: .3; }
+    #Body.colorsVisible .tile.red {
+      background-color: #FF4056; }
+    #Body.colorsVisible .tile.blue {
+      background-color: #4040FF; }
+    #Body.colorsVisible .tile.tan {
+      background-color: #FFA65B; }
+    #Body.colorsVisible .tile.black {
+      background-color: #000000; }
+  #Body .entryFormContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    #Body .entryFormContainer > div {
+      text-align: center;
+      width: 95%;
+      max-width: 20rem; }
+      #Body .entryFormContainer > div .title {
+        font-size: 3em;
+        font-variant: small-caps; }
+      #Body .entryFormContainer > div input {
+        text-align: center;
+        border: none;
+        border-bottom: 3px solid #444;
+        background-color: transparent;
+        font-size: 1.5em;
+        color: #212121; }
+      #Body .entryFormContainer > div button {
+        font-size: 1.3em;
+        padding: .5rem; }
+      #Body .entryFormContainer > div input, #Body .entryFormContainer > div button {
+        display: block;
+        width: 100%; }
+      #Body .entryFormContainer > div .label {
+        font-size: .8em; }
+        #Body .entryFormContainer > div .label.prompt {
+          margin: 1rem 0 .2rem 0; }
+        #Body .entryFormContainer > div .label.isFiltered {
+          visibility: hidden;
+          font-size: .7em;
+          margin-bottom: 1rem; }
+
+#Footer {
+  font-size: .7em;
+  padding: .1em; }
+  #Footer .website {
+    text-align: center; }

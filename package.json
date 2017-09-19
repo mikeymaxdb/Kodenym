@@ -1,0 +1,19 @@
+{
+  "name": "kodenym",
+  "version": "0.0.1",
+  "description": "kodenym",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js -e js",
+    "build-css": "node-sass css/style.scss public/css/style.css",
+    "watch-css": "nodemon -e css/*.scss -x 'npm run build-css'"
+  },
+  "author": "mike o",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "node-sass": "^4.1.1",
+    "nodemon": "^1.11.0",
+    "socket.io": "^1.7.2"
+  }
+}
