@@ -1,4 +1,6 @@
-var nouns = ["AFRICA","AGENT","AIR","ALIEN","ALPS","AMAZON","AMBULANCE","AMERICA","ANGEL","ANTARCTICA","APPLE","ARM","ATLANTIS","AUSTRALIA","AZTEC","BACK","BALL","BAND","BANK","BAR","BARK","BAT","BATTERY","BEACH","BEAR","BEAT","BED","BEIJING","BELL","BELT","BERLIN","BERMUDA","BERRY","BILL","BLOCK","BOARD","BOLT","BOMB","BOND","BOOM","BOOT","BOTTLE","BOW","BOX","BRIDGE","BRUSH","BUCK","BUFFALO","BUG","BUGLE","BUTTON","CALF","CANADA","CAP","CAPITAL","CAR","CARD","CARROT","CASINO","CAST","CAT","CELL","CENTAUR","CENTER","CHAIR","CHANGE","CHARGE","CHECK","CHEST","CHICK","CHINA","CHOCOLATE","CHURCH","CIRCLE","CLIFF","CLOAK","CLUB","CODE","COLD","COMIC","COMPOUND","CONCERT","CONDUCTOR","CONTRACT","COOK","COPPER","COTTON","COURT","COVER","CRANE","CRASH","CRICKET","CROSS","CROWN","CYCLE","CZECH","DANCE","DATE","DAY","DEATH","DECK","DEGREE","DIAMOND","DICE","DINOSAUR","DISEASE","DOCTOR","DOG","DRAFT","DRAGON","DRESS","DRILL","DROP","DUCK","DWARF","EAGLE","EGYPT","EMBASSY","ENGINE","ENGLAND","EUROPE","EYE","FACE","FAIR","FALL","FAN","FENCE","FIELD","FIGHTER","FIGURE","FILE","FILM","FIRE","FISH","FLUTE","FLY","FOOT","FORCE","FOREST","FORK","FRANCE","GAME","GAS","GENIUS","GERMANY","GHOST","GIANT","GLASS","GLOVE","GOLD","GRACE","GRASS","GREECE","GREEN","GROUND","HAM","HAND","HAWK","HEAD","HEART","HELICOPTER","HIMALAYAS","HOLE","HOLLYWOOD","HONEY","HOOD","HOOK","HORN","HORSE","HORSESHOE","HOSPITAL","HOTEL","ICE","ICE CREAM","INDIA","IRON","IVORY","JACK","JAM","JET","JUPITER","KANGAROO","KETCHUP","KEY","KID","KING","KIWI","KNIFE","KNIGHT","LAB","LAP","LASER","LAWYER","LEAD","LEMON","LEPRECHAUN","LIFE","LIGHT","LIMOUSINE","LINE","LINK","LION","LITTER","LOCH NESS","LOCK","LOG","LONDON","LUCK","MAIL","MAMMOTH","MAPLE","MARBLE","MARCH","MASS","MATCH","MERCURY","MEXICO","MICROSCOPE","MILLIONAIRE","MINE","MINT","MISSILE","MODEL","MOLE","MOON","MOSCOW","MOUNT","MOUSE","MOUTH","MUG","NAIL","NEEDLE","NET","NEW YORK","NIGHT","NINJA","NOTE","NOVEL","NURSE","NUT","OCTOPUS","OIL","OLIVE","OLYMPUS","OPERA","ORANGE","ORGAN","PALM","PAN","PANTS","PAPER","PARACHUTE","PARK","PART","PASS","PASTE","PENGUIN","PHOENIX","PIANO","PIE","PILOT","PIN","PIPE","PIRATE","PISTOL","PIT","PITCH","PLANE","PLASTIC","PLATE","PLATYPUS","PLAY","PLOT","POINT","POISON","POLE","POLICE","POOL","PORT","POST","POUND","PRESS","PRINCESS","PUMPKIN","PUPIL","PYRAMID","QUEEN","RABBIT","RACKET","RAY","REVOLUTION","RING","ROBIN","ROBOT","ROCK","ROME","ROOT","ROSE","ROULETTE","ROUND","ROW","RULER","SATELLITE","SATURN","SCALE","SCHOOL","SCIENTIST","SCORPION","SCREEN","SCUBA DIVER","SEAL","SERVER","SHADOW","SHAKESPEARE","SHARK","SHIP","SHOE","SHOP","SHOT","SINK","SKYSCRAPER","SLIP","SLUG","SMUGGLER","SNOW","SNOWMAN","SOCK","SOLDIER","SOUL","SOUND","SPACE","SPELL","SPIDER","SPIKE","SPINE","SPOT","SPRING","SPY","SQUARE","STADIUM","STAFF","STAR","STATE","STICK","STOCK","STRAW","STREAM","STRIKE","STRING","SUB","SUIT","SUPERHERO","SWING","SWITCH","TABLE","TABLET","TAG","TAIL","TAP","TEACHER","TELESCOPE","TEMPLE","THEATER","THIEF","THUMB","TICK","TIE","TIME","TOKYO","TOOTH","TORCH","TOWER","TRACK","TRAIN","TRIANGLE","TRIP","TRUNK","TUBE","TURKEY","UNDERTAKER","UNICORN","VACUUM","VAN","VET","WAKE","WALL","WAR","WASHER","WASHINGTON","WATCH","WATER","WAVE","WEB","WELL","WHALE","WHIP","WIND","WITCH","WORM","YARD"];
+// TODO Improve tile color assignment (needed for dynamic game size)
+// TODO Add sanitization to more user inputs!!
+// TODO Improve state managment
 
 var express = require('express');
 var app = express();
@@ -8,7 +10,9 @@ var game = {};
 var gameDB = {};
 var socketDB = {};
 
-game.generateTiles = function(numTiles){
+var nouns = require('./dicts/standard.dict');
+
+game.generateTiles = function(numTiles, words){
 	var tiles = [],
 	randInt;
 	var tileColors = ["red","red","red","red","red","red","red","red","blue","blue","blue","blue","blue","blue","blue","blue","tan","tan","tan","tan","tan","tan","tan","black"];
@@ -22,7 +26,7 @@ game.generateTiles = function(numTiles){
 	}
 	tileColors.push(firstTurnColor);
 	while(indexes.length != numTiles){
-		randInt = Math.floor(Math.random()*nouns.length);
+		randInt = Math.floor(Math.random()*words.length);
 		if(indexes.indexOf(randInt) == -1){
 			indexes.push(randInt);
 		}
@@ -31,7 +35,7 @@ game.generateTiles = function(numTiles){
 		
 		randColorIndex = Math.floor(Math.random()*tileColors.length);
 		tiles.push({
-			word: nouns[indexes[i]],
+			word: words[indexes[i]],
 			status: "hidden",
 			color: tileColors[randColorIndex]
 		});
@@ -39,15 +43,15 @@ game.generateTiles = function(numTiles){
 	}
 	return {tiles:tiles,firstTurn:firstTurnColor};
 }
-game.newGame = function(settings){
+game.newGame = function(gameId,settings){
 	var ng = {};
-	ng.id = settings.id;
-	ng.columns = settings.columns;
-	ng.rows = settings.rows;
-	var newTiles = game.generateTiles(25);
+	var newTiles = game.generateTiles(settings.columns*settings.rows, settings.customDict||nouns);
+	
+	ng.id = gameId;
 	ng.tiles = newTiles.tiles;
 	ng.firstTurn = newTiles.firstTurn;
 	ng.settings = settings;
+
 	return ng;
 }
 game.onTileClick = function(gameId,tileIndex){
@@ -57,40 +61,64 @@ game.onTileClick = function(gameId,tileIndex){
 	gameDB[gameId].tiles[tileIndex].status = "turned";
 }
 
+game.syncClients = function(gameId){
+	io.to(gameId).emit("gameUpdate",gameDB[gameId]);
+}
+
 app.use(express.static('public'));
 
 io.on('connection', function(socket){
-	//console.log('a user connected');
+	
 	socket.on('disconnect', function(){
-		//console.log('[-] A user disconnected');
+		
 	});
-	socket.on("joinGame",function(settings){
-		settings.id = settings.id.replace(/\W/g, '');
-		settings.id = settings.id.trim();
-		settings.id = settings.id.substring(0,20);
-		settings.id = settings.id.toLowerCase();
-		if(!gameDB[settings.id]){
-			var ng = game.newGame(settings);
-			gameDB[settings.id] = ng;
+
+	socket.on("joinGame",function(gameId, settings){
+		// Sanitize game name
+		gameId = gameId.replace(/\W/g, '');
+		gameId = gameId.trim();
+		gameId = gameId.substring(0,20);
+		gameId = gameId.toLowerCase();
+
+		// Create a new game if it doesn't exist
+		if(!gameDB[gameId]){
+			var ng = game.newGame(gameId, settings);
+			gameDB[gameId] = ng;
 		}
+
+		// Leave any other games the socket is in
 		if(socket.rooms){
 			for(var room in socket.rooms){
 				socket.leave(room);
 			}
 		}
 		
-		console.log("[+] A user joined '"+settings.id+"'");
-		socket.gameId = settings.id;
-		socket.join(settings.id);
-		socket.emit("newGame", gameDB[settings.id]);
-		io.to(settings.id).emit("gameUpdate",gameDB[settings.id]);
+		// Setup socket and start their game
+		socket.gameId = gameId;
+		socket.join(gameId);
+		socket.emit("newGame", gameDB[gameId]);
+		console.log("[+] A user joined '"+gameId+"'");
+
+		// Update socket with game
+		game.syncClients(socket.gameId);
 	});
-	socket.on("newGame",function(){
+	socket.on("newGame",function(settings){
 		if(!socket.gameId){
 			return;
 		}
+
+		if(settings){
+			if(settings.customDict.length < 100 || setings.customDict.length > 1000){
+				settings.customDict = undefined;
+			}
+			gameDB[socket.gameId].settings = settings;
+		}
+
+		var id = socket.gameId;
+		var settings = gameDB[socket.gameId].settings;
+
 		console.log("[+] New tiles for '%s'",socket.gameId);
-		gameDB[socket.gameId] = game.newGame(gameDB[socket.gameId].settings);
+		gameDB[socket.gameId] = game.newGame(id, settings);
 		io.to(socket.gameId).emit("newGame",gameDB[socket.gameId]);
 	});
 	socket.on("tileClick", function(tileIndex){
@@ -98,7 +126,7 @@ io.on('connection', function(socket){
 			return;
 		}
 		game.onTileClick(socket.gameId, tileIndex);
-		io.to(socket.gameId).emit("gameUpdate",gameDB[socket.gameId]);
+		game.syncClients(socket.gameId);
 	});
 });
 

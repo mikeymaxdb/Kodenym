@@ -14,7 +14,7 @@
 		<div id="MainContainer">
 			<div id="Header">
 				<div>
-					<span class="title">Kodenym</span>
+					<span class="title"><a href="/">Kodenym</a></span>
 					<button id="NewGame">New Tiles</button>
 				</div>
 				<div class="score">
@@ -24,21 +24,61 @@
 				</div>
 				<div class="right">
 					<button id="ToggleColors">Toggle Colors</button>
+					<button id="Settings">Settings</button>
 				</div>
 			</div>
 			<div id="Body">
 				<div class="entryFormContainer">
 					<div>
-						<div class="title">Kodenym</div>
-						<div class="label prompt">Enter game name:</div>
-						<div><input type="text" value="kbxy" id="GameId" /></div>
-						<div class="label isFiltered">We've tweaked your game name</div>
-						<div><button id="JoinGame">Join Game</button></div>
+						<form id="GameIdForm">
+							<div class="title">Kodenym</div>
+							<div class="label prompt">Enter game name:</div>
+							<div><input type="text" value="kbxy" id="GameId" /></div>
+							<div><input type="submit" id="JoinGame" value="Join Game"/></div>
+						</form>
 					</div>
 				</div>
+				<div class="tileRowsContainer"></div>
 			</div>
 			<div id="Footer">
 				<div class="website">Brought to you by <a href="//beyondbox.net">BeyondBox.net</a>. Inspired by <a href="http://czechgames.com/en/codenames/">Codenames</a>.</div>
+			</div>
+			<div id="SettingsContainer">
+				<div class="settings">
+					<div class="title">Settings</div>
+					<div class="settingRow">
+						<div class="setting disabled">
+							<div class="label">Number of rows</div>
+							<div class="inputLine">
+								<input type="number" id="customRows" />
+							</div>
+						</div>
+						<div class="setting disabled">
+							<div class="label">Number of columns</div>
+							<div class="inputLine">
+								<input type="number" id="customCols" />
+							</div>
+						</div>
+					</div>
+					<div class="setting">
+						<div class="label">Custom word library (comma separated, 100 words minimum)</div>
+						<div class="inputLine">
+							<textarea id="customDict"></textarea>
+						</div>
+					</div>
+					<div class="setting disabled">
+						<div class="label">
+							<input type="checkbox" />
+							Use images (coming soon)
+						</div>
+					</div>
+					<div class="setting disabled">
+						<div class="label">Custom image library (50 url minimum)</div>
+						<div class="inputLine">
+							<textarea name=""></textarea>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
