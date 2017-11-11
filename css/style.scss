@@ -79,8 +79,6 @@ html,body,#MainContainer{
 	}
 	.title{
 		text-align: center;
-		font-size: 1.2em;
-		font-variant: small-caps;
 		padding-right: 1em;
 		a{
 			text-decoration: none;
@@ -88,6 +86,7 @@ html,body,#MainContainer{
 	}
 	.score{
 		justify-content:center;
+		font-size: 1.2em;
 		.scoreNumber{
 			font-weight: 600;
 			&#RedLeft{
@@ -128,6 +127,7 @@ html,body,#MainContainer{
 				font-size: 1.5rem;
 				border-radius: .5rem;
 				cursor: pointer;
+				padding: 1rem;
 				&[data-status='turned']{
 					color:#FFF;
 					&.red{
