@@ -108,7 +108,7 @@ io.on('connection', function(socket){
 		}
 
 		if(settings){
-			if(settings.customDict.length < 100 || setings.customDict.length > 1000){
+			if(settings.customDict.length < 100 || settings.customDict.length > 1000){
 				settings.customDict = undefined;
 			}
 			gameDB[socket.gameId].settings = settings;
