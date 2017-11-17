@@ -80,6 +80,10 @@ io.on('connection', function(socket){
 		gameId = gameId.substring(0,20);
 		gameId = gameId.toLowerCase();
 
+		if(!gameId){
+			return;
+		}
+
 		// Create a new game if it doesn't exist
 		if(!gameDB[gameId]){
 			var ng = game.newGame(gameId, settings);
@@ -108,9 +112,27 @@ io.on('connection', function(socket){
 		}
 
 		if(settings){
-			if(settings.customDict.length < 100 || settings.customDict.length > 1000){
-				settings.customDict = undefined;
+			if(settings.customDict){
+				if(settings.customDict.length < 100 || settings.customDict.length > 1000){
+					settings.customDict = [];
+				}
+
+				for(var i=0,max=settings.customDict.length;i<max;i++){
+					var word = settings.customDict[i] || "";
+					word = word.trim();
+					word = word.substring(0,50);
+					word = word.toLowerCase();
+
+					if(!word){
+						settings.customDict.splice(i, 1);
+					}
+				}
+
+				if(settings.customDict.length < 100 || settings.customDict.length > 1000){
+					settings.customDict = [];
+				}
 			}
+
 			gameDB[socket.gameId].settings = settings;
 		}
 
