@@ -45,7 +45,8 @@ game.generateTiles = function(numTiles, words){
 }
 game.newGame = function(gameId,settings){
 	var ng = {};
-	var newTiles = game.generateTiles(settings.columns*settings.rows, settings.customDict||nouns);
+	var dictionary = (settings.customDict && settings.customDict.length)?setting.customDict:nouns;
+	var newTiles = game.generateTiles(settings.columns*settings.rows, dictionary);
 	
 	ng.id = gameId;
 	ng.tiles = newTiles.tiles;
