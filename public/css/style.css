@@ -52,13 +52,12 @@ html, body, #MainContainer {
     align-items: center; }
   #Header .title {
     text-align: center;
-    font-size: 1.2em;
-    font-variant: small-caps;
     padding-right: 1em; }
     #Header .title a {
       text-decoration: none; }
   #Header .score {
-    justify-content: center; }
+    justify-content: center;
+    font-size: 1.2em; }
     #Header .score .scoreNumber {
       font-weight: 600; }
       #Header .score .scoreNumber#RedLeft {
@@ -91,7 +90,8 @@ html, body, #MainContainer {
         justify-content: center;
         font-size: 1.5rem;
         border-radius: .5rem;
-        cursor: pointer; }
+        cursor: pointer;
+        padding: 1rem; }
         #Body .tileRowsContainer .row .tile[data-status='turned'] {
           color: #FFF; }
           #Body .tileRowsContainer .row .tile[data-status='turned'].red {
