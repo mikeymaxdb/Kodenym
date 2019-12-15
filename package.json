@@ -1,6 +1,6 @@
 {
   "name": "kodenym",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "kodenym",
   "main": "server.js",
   "scripts": {
@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "node-sass": "^4.12.0",
-    "nodemon": "^1.19.1",
-    "socket.io": "^2.2.0"
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
+    "socket.io": "^2.3.0"
   }
 }
