@@ -18,7 +18,7 @@ game.generateTiles = function(numTiles, words){
     var tileColors = ["red","red","red","red","red","red","red","red","blue","blue","blue","blue","blue","blue","blue","blue","tan","tan","tan","tan","tan","tan","tan","black"];
     var indexes = [];
     var firstTurnColor;
-    
+
     if(Math.round(Math.random())==1){
         firstTurnColor = "red";
     } else {
@@ -32,7 +32,6 @@ game.generateTiles = function(numTiles, words){
         }
     }
     for(var i=0;i<numTiles;i++){
-        
         randColorIndex = Math.floor(Math.random()*tileColors.length);
         tiles.push({
             word: words[indexes[i]],
@@ -47,7 +46,7 @@ game.newGame = function(gameId,settings){
     var ng = {};
     var dictionary = (settings.customDict && settings.customDict.length)?setting.customDict:nouns;
     var newTiles = game.generateTiles(settings.columns*settings.rows, dictionary);
-    
+
     ng.id = gameId;
     ng.tiles = newTiles.tiles;
     ng.firstTurn = newTiles.firstTurn;
@@ -69,9 +68,7 @@ game.syncClients = function(gameId){
 app.use(express.static('public'));
 
 io.on('connection', function(socket){
-    
     socket.on('disconnect', function(){
-        
     });
 
     socket.on("joinGame",function(gameId, settings){
@@ -97,7 +94,7 @@ io.on('connection', function(socket){
                 socket.leave(room);
             }
         }
-        
+
         // Setup socket and start their game
         socket.gameId = gameId;
         socket.join(gameId);

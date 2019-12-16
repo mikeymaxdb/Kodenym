@@ -1,4 +1,4 @@
-// TODO improve state management
+/* eslint-disable */
 
 var App = {};
 
@@ -84,7 +84,7 @@ App.settings = {
 
 App.start = function(){
     App.socket = io();
-    
+
     App.socket.on("connect", function(){
         // Join a game if it's in the url
         // Else, show the game name form
@@ -122,7 +122,7 @@ App.start = function(){
     $("#customRows").val(App.settings.rows);
     $("#customCols").val(App.settings.columns);
 
-    
+
 
     $("#NewGame").click(function(){
         // Get new tiles for the game

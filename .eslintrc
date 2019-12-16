@@ -1,0 +1,24 @@
+{
+    "extends": "airbnb",
+    "plugins": ["react-hooks"],
+    "rules": {
+        "semi": 0,
+        "indent": [2,4,{"SwitchCase":1}],
+        "react/jsx-indent": [2,4],
+        "react/jsx-indent-props": [2,4],
+        "import/extensions": 0,
+        "max-len": [2,120],
+
+        "no-unused-vars": [1],
+    },
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.config.js"
+            }
+        }
+    },
+}
