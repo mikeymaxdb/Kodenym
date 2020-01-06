@@ -7,7 +7,7 @@ import KodenymContainer from 'containers/KodenymContainer'
 
 const store = configureStore()
 
-require('style.scss')
+require('./style/Root.scss')
 
 render(
     <Provider store={store}>

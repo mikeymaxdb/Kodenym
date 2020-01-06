@@ -1,0 +1,65 @@
+@import 'style/colors';
+
+.Tiles{
+    flex: 1;
+    overflow: auto;
+
+    .tile{
+        padding: .5rem;
+        width: 20%;
+        height: 20%;
+        float: left;
+
+        button {
+            background-color: $tile-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border-radius: .5rem;
+            border: none;
+            cursor: pointer;
+            padding: 1rem;
+            width: 100%;
+            height: 100%;
+
+            &.turned{
+                color:#FFF;
+
+                &.red{
+                    background-color: $red;
+                }
+                &.blue{
+                    background-color: $blue;
+                }
+                &.tan{
+                    background-color: $tan;
+                }
+                &.black{
+                    background-color: $black;
+                }
+            }
+        }
+    }
+
+    &.colorsVisible{
+        .tile{
+            &[data-status='turned']{
+                opacity: .3;
+            }
+            color:#fff;
+            &.red{
+                background-color: $red;
+            }
+            &.blue{
+                background-color: $blue;
+            }
+            &.tan{
+                background-color: $tan;
+            }
+            &.black{
+                background-color: $black;
+            }
+        }
+    }
+}
