@@ -103,7 +103,7 @@ html, body, #MainContainer {
           #Body .tileRowsContainer .row .tile[data-status='turned'].black {
             background-color: #000000; }
   #Body.colorsVisible .tile {
-    color: #fff; }
+    color: #fff; pointer-events: none;}
     #Body.colorsVisible .tile[data-status='turned'] {
       opacity: .3; }
     #Body.colorsVisible .tile.red {
