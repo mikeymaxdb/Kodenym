@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+module.exports = (env, argv) => ({
     entry: {
         index: './src/index.jsx',
     },
@@ -26,7 +26,7 @@ module.exports = {
             { from: 'src/img', to: 'img' },
         ]),
         new webpack.DefinePlugin({
-            ENV: JSON.stringify(process.env.NODE_ENV)
+            ENV: JSON.stringify(argv.mode)
         }),
     ],
     module: {
@@ -65,4 +65,4 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'public'),
     },
-}
+})

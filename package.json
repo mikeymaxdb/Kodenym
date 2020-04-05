@@ -4,9 +4,9 @@
   "description": "kodenym",
   "main": "server.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --mode=development",
     "start-server": "nodemon --watch server ./server/server.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode=production"
   },
   "author": "mike o",
   "license": "MIT",
