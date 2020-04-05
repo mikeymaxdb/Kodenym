@@ -14,11 +14,7 @@ import {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const loggerMiddleware = createLogger()
 console.debug('ENV', ENV)
-const socket = (ENV === 'production' ? (
-    io('//kodenym.beyondbox.net', { path: '/kodenymSocket' })
-) : (
-    io('http://localhost:8081', { path: '/kodenymSocket' }))
-)
+const socket = io((ENV === 'production' ? '//kodenym.beyondbox.net' : 'http://localhost:8081'))
 
 export default () => {
     const store = createStore(
