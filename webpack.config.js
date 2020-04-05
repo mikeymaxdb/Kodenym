@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -24,6 +25,9 @@ module.exports = {
         new CopyPlugin([
             { from: 'src/img', to: 'img' },
         ]),
+        new webpack.DefinePlugin({
+            ENV: JSON.stringify(process.env.NODE_ENV)
+        }),
     ],
     module: {
         rules: [

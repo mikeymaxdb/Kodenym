@@ -5,7 +5,7 @@ const Game = require('./Game')
 
 const app = express();
 const server = http.Server(app);
-const io = socketio(server);
+const io = socketio(server, { path: '/kodenymSocket' });
 
 const gameDB = {};
 

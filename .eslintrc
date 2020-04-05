@@ -13,6 +13,9 @@
 
         "no-unused-vars": [1],
     },
+    "globals": {
+        "ENV": "readonly",
+    },
     "env": {
         "browser": true
     },
