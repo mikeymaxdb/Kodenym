@@ -1,7 +1,10 @@
 @import 'style/colors';
 
 .Header {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 
     .connectionContainer {
         position: absolute;
