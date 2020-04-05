@@ -1,4 +1,4 @@
-const nouns = require('./dicts/standard.dict');
+const dictionaries = require('./dictionaries');
 
 class Game {
     constructor(gameId, settings) {
@@ -6,18 +6,20 @@ class Game {
         this._settings = {}
         this.tiles = []
         this.firstTurn = null
-        this.numTiles = 0
+        this.numTiles = 25
 
-        this.settings = settings || { columns: 5, rows: 5 };
+        this.settings = settings
         this.generateTiles();
     }
 
     set settings(settings = {}) {
-        this.numTiles = settings.columns * settings.rows;
-
         this._settings = {
             ...settings,
         }
+    }
+
+    get settings() {
+        return this._settings
     }
 
     generateTiles() {
@@ -39,8 +41,9 @@ class Game {
             firstTurnColor = 'blue';
         }
         tileColors.push(firstTurnColor);
+
         while (indexes.length !== this.numTiles) {
-            randInt = Math.floor(Math.random() * nouns.length);
+            randInt = Math.floor(Math.random() * dictionaries.default.length);
             if (indexes.indexOf(randInt) === -1) {
                 indexes.push(randInt);
             }
@@ -48,7 +51,7 @@ class Game {
         for (let i = 0; i < this.numTiles; i += 1) {
             const randColorIndex = Math.floor(Math.random() * tileColors.length);
             tiles.push({
-                word: nouns[indexes[i]],
+                word: dictionaries.default[indexes[i]],
                 status: 'hidden',
                 color: tileColors[randColorIndex],
             });
@@ -71,7 +74,7 @@ class Game {
         return {
             gameId: this.gameId,
             tiles: [ ...this.tiles],
-            settings: { ...this._settings },
+            settings: { ...this.settings },
         }
     }
 }
