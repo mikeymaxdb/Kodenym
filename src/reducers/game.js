@@ -3,10 +3,7 @@ import * as types from 'constants/actionTypes'
 const initialState = {
     gameId: '',
     tiles: [],
-    settings: {
-        columns: 5,
-        rows: 5,
-    },
+    settings: {},
 }
 
 const game = (state = initialState, action) => {

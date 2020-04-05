@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
                 let newGameId = action.gameId.replace(/\W/g, '');
                 newGameId = newGameId.trim();
                 newGameId = newGameId.substring(0, 20);
-                newGameId = newGameId.toLowerCase();
+                newGameId = newGameId.toUpperCase();
 
                 if (!newGameId) {
                     return;
@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
 
                 // Create a new game if it doesn't exist
                 if (!gameDB[newGameId]) {
-                    gameDB[newGameId] = new Game(newGameId, action.settings);
+                    gameDB[newGameId] = new Game(newGameId, null);
                 }
 
                 // Leave any other games the socket is in
@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
                     break;
                 }
 
-                gameDB[gameId] = new Game(gameId, action.settings);
+                gameDB[gameId] = new Game(gameId, null);
                 io.to(gameId).emit('message', newGameAction());
                 break;
             case 'TILE_CLICK':

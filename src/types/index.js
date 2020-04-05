@@ -23,3 +23,8 @@ export const gameType = shape({
     tiles: tilesType,
     settings: settingsType,
 })
+
+export const scoreType = shape({
+    red: number.isRequired,
+    blue: number.isRequired,
+})

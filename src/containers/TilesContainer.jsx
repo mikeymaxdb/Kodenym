@@ -1,25 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { func } from 'prop-types'
+import { bool, func } from 'prop-types'
 
 import { tilesType } from 'types'
 
 import { getTiles } from 'selectors/game'
+import { getIsSpymaster } from 'selectors/ui'
 import { tileClick } from 'actions/gameActions'
 
 import Tiles from 'components/Tiles'
 
-const TilesContainer = ({ tiles, onTileClick }) => (
-    <Tiles tiles={tiles} onTileClick={onTileClick} />
+const TilesContainer = ({ tiles, isSpymaster, onTileClick }) => (
+    <Tiles tiles={tiles} isSpymaster={isSpymaster} onTileClick={onTileClick} />
 )
 
 TilesContainer.propTypes = {
     tiles: tilesType.isRequired,
+    isSpymaster: bool.isRequired,
     onTileClick: func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     tiles: getTiles(state),
+    isSpymaster: getIsSpymaster(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

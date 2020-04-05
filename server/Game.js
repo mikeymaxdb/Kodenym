@@ -8,41 +8,15 @@ class Game {
         this.firstTurn = null
         this.numTiles = 0
 
-        this.settings = settings;
+        this.settings = settings || { columns: 5, rows: 5 };
         this.generateTiles();
     }
 
     set settings(settings = {}) {
         this.numTiles = settings.columns * settings.rows;
 
-        // TODO refactor
-        let customDict = [];
-        if (settings.customDict) {
-            customDict = settings.customDict;
-
-            if (customDict.length < 100 || customDict.length > 1000) {
-                customDict = [];
-            }
-
-            for (let i = 0, max = customDict.length; i < max; i += 1) {
-                let word = customDict[i] || '';
-                word = word.trim();
-                word = word.substring(0, 50);
-                word = word.toLowerCase();
-
-                if (!word) {
-                    customDict.splice(i, 1);
-                }
-            }
-
-            if (customDict.length < 100 || customDict.length > 1000) {
-                customDict = [];
-            }
-        }
-
         this._settings = {
             ...settings,
-            customDict,
         }
     }
 

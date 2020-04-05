@@ -7,7 +7,7 @@ const Footer = () => (
         <span>Brought to you by </span>
         <a href="//beyondbox.net">BeyondBox.net</a>
         <span>. Inspired by </span>
-        <a href="http://czechgames.com/en/codenames/">Codenames</a>
+        <a href="https://czechgames.com/en/codenames/">Codenames</a>
         .
     </div>
 )

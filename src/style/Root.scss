@@ -1,12 +1,6 @@
 @import "style/colors";
 
-// Medium screens
-$medium: "(min-width: 40em)";
-
-// Large screens
-$large: "(min-width: 64em)";
-
-*{
+* {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
     box-sizing: border-box;
@@ -14,56 +8,16 @@ $large: "(min-width: 64em)";
     margin:0;
     font-family: 'Montserrat', sans-serif;
 }
-html{
-    font-size: 8px;
-
-    @media #{$medium} {
-        font-size: 12px;
-    }
-    @media #{$large} {
-        font-size: 16px;
-    }
+html {
+    font-size: 1.1vw;
 }
 
 html, body, #Root {
     height: 100%;
     width: 100%;
+    background-color: #666;
 }
 
-#Header{
-    display: none;
-    padding: .5rem;
-    font-size: 1rem;
-    &>div{
-        flex:1;
-        display: flex;
-        align-items: center;
-    }
-    .title{
-        text-align: center;
-        padding-right: 1em;
-        a{
-            text-decoration: none;
-        }
-    }
-    .score{
-        justify-content:center;
-        font-size: 1.2em;
-        .scoreNumber{
-            font-weight: 600;
-            &#RedLeft{
-                color: $red;
-            }
-            &#BlueLeft{
-                color: $blue;
-            }
-        }
-    }
-    #GameIdTitle{
-        padding: 0px 1rem;
-        font-size: 1.2em;
-    }
-    .right{
-        justify-content: flex-end;
-    }
+a {
+    color: inherit;
 }

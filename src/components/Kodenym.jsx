@@ -1,24 +1,30 @@
 import React from 'react'
-
-import { gameType } from 'types'
+import { bool } from 'prop-types'
 
 import TilesContainer from 'containers/TilesContainer'
+import JoinGameContainer from 'containers/JoinGameContainer'
+import HeaderContainer from 'containers/HeaderContainer'
+
+import Footer from 'components/Footer'
 
 require('./Kodenym.scss')
 
-const Kodenym = ({ game }) => (
+const Kodenym = ({ hasGame }) => (
     <div className="Kodenym">
-        {game.gameId}
-        <TilesContainer />
+        <HeaderContainer />
+        <div className="gameplayContainer">
+            {hasGame ? (
+                <TilesContainer />
+            ) : (
+                <JoinGameContainer />
+            )}
+        </div>
+        <Footer />
     </div>
 )
 
-Kodenym.defaultProps = {
-    game: null,
-}
-
 Kodenym.propTypes = {
-    game: gameType,
+    hasGame: bool.isRequired,
 }
 
 export default Kodenym

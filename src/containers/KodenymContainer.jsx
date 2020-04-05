@@ -1,24 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bool } from 'prop-types'
 
-import { gameType } from 'types'
-import { getGame } from 'selectors/game'
-
+import { getHasGame } from 'selectors/ui'
 import Kodenym from 'components/Kodenym'
 
-const KodenymContainer = ({ game }) => (
-    <Kodenym game={game} />
+const KodenymContainer = ({ hasGame }) => (
+    <Kodenym
+        hasGame={hasGame}
+    />
 )
 
-KodenymContainer.defaultProps = {
-    game: null,
-}
-
 KodenymContainer.propTypes = {
-    game: gameType,
+    hasGame: bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    game: getGame(state),
+    hasGame: getHasGame(state),
 })
+
 export default connect(mapStateToProps)(KodenymContainer)

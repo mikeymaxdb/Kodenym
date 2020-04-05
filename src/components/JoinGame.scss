@@ -1,0 +1,47 @@
+.JoinGame {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .joinContent {
+        display: none;
+
+        p {
+            max-width: 20rem;
+            padding-bottom: 1rem;
+        }
+        form {
+            input {
+                display: block;
+                width: 100%;
+
+                &.gameId {
+                    text-transform: uppercase;
+                    border: 0;
+                    border-radius: 1rem;
+                    padding: 1rem;
+                    font-size: 1rem;
+                    text-align: center;
+                }
+                &.submit {
+                    margin-top: 1rem;
+                    padding: 1rem;
+                    font-size: 1rem;
+                    border: 0;
+                    background-color: #43afcb;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    &.connected {
+        .loadingContainer {
+            display: none;
+        }
+        .joinContent {
+            display: block;
+        }
+    }
+}
