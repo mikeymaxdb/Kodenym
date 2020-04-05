@@ -67,11 +67,12 @@ io.on('connection', (socket) => {
                 break;
             }
             case 'NEW_GAME':
-                if (!gameId) {
+                if (!gameId || !gameDB[gameId]) {
                     break;
                 }
 
-                gameDB[gameId] = new Game(gameId, null);
+                gameDB[gameId].generateTiles()
+
                 io.to(gameId).emit('message', newGameAction());
                 break;
             case 'TILE_CLICK':

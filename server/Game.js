@@ -5,8 +5,9 @@ class Game {
         this.gameId = gameId
         this._settings = {}
         this.tiles = []
-        this.firstTurn = null
+        this.usedWords = []
         this.numTiles = 25
+        this.dictionary = dictionaries.default
 
         this.settings = settings
         this.generateTiles();
@@ -22,43 +23,48 @@ class Game {
         return this._settings
     }
 
+    generateNextWord() {
+        const len = this.dictionary.length
+        while(true) {
+            const candidate = dictionaries.default[Math.floor(Math.random() * len)]
+            if (!this.usedWords.includes(candidate)) {
+                this.usedWords.push(candidate)
+                return candidate
+            }
+        }
+    }
+
     generateTiles() {
-        const tiles = [];
-        let randInt;
-        // TODO refactor colors
+        // Reset used words if there aren't enough
+        if ((this.dictionary.length - this.usedWords.length) < this.numTiles) {
+            this.usedWords = []
+        }
+
         const tileColors = [
             'red', 'red', 'red', 'red', 'red', 'red', 'red', 'red',
             'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue',
             'tan', 'tan', 'tan', 'tan', 'tan', 'tan', 'tan',
-            'black',
+            'black', (Math.round(Math.random()) === 1 ? 'red' : 'blue'),
         ];
-        const indexes = [];
-        let firstTurnColor;
 
-        if (Math.round(Math.random()) === 1) {
-            firstTurnColor = 'red';
-        } else {
-            firstTurnColor = 'blue';
-        }
-        tileColors.push(firstTurnColor);
-
-        while (indexes.length !== this.numTiles) {
-            randInt = Math.floor(Math.random() * dictionaries.default.length);
-            if (indexes.indexOf(randInt) === -1) {
-                indexes.push(randInt);
-            }
-        }
-        for (let i = 0; i < this.numTiles; i += 1) {
-            const randColorIndex = Math.floor(Math.random() * tileColors.length);
+        // Generate tiles
+        const tiles = [];
+        tileColors.forEach((color) => {
             tiles.push({
-                word: dictionaries.default[indexes[i]],
+                word: this.generateNextWord(),
                 status: 'hidden',
-                color: tileColors[randColorIndex],
-            });
-            tileColors.splice(randColorIndex, 1);
+                color,
+            })
+        })
+
+        // Shuffle tiles
+        for (let i = (tiles.length - 1); i > 0; i -= 1) {
+            const j = Math.floor(Math.random() * i)
+            const temp = tiles[i]
+            tiles[i] = tiles[j]
+            tiles[j] = temp
         }
         this.tiles = tiles;
-        this.firstTurn = firstTurnColor;
     }
 
     onTileClick(tileIndex) {
