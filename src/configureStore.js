@@ -13,6 +13,7 @@ import {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const loggerMiddleware = createLogger()
+console.debug('ENV', ENV)
 const socket = (ENV === 'production' ? (
     io({ path: '/kodenymSocket' })
 ) : (
