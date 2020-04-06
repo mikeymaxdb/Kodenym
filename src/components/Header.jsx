@@ -22,21 +22,20 @@ const Header = ({
         </div>
         <div className="inner">
             <div className="logo">
-                KODENYM.com#
-                {gameId}
+                <a href="/">
+                    <img src="/img/kodenym_logo.svg" alt="kodenym logo" />
+                </a>
             </div>
             {score ? (
                 <div className="score">
                     <div className="red">{score.red}</div>
+                    {gameId}
                     <div className="blue">{score.blue}</div>
                 </div>
             ) : null}
             <div className="buttons">
                 <button type="button" onClick={newGame}>New tiles</button>
                 <button type="button" onClick={toggleColors}>{isSpymaster ? 'Spy' : 'Spymaster'}</button>
-                <a href="/">
-                    <button type="button">Leave game</button>
-                </a>
             </div>
         </div>
     </div>

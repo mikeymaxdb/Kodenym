@@ -15,7 +15,12 @@ html {
 html, body, #Root {
     height: 100%;
     width: 100%;
-    background-color: #ccc;
+}
+
+body {
+    background-image: url('/img/kodenym_bg@4x-100_2.jpg');
+    background-position: center;
+    background-size: 100% 100%;
 }
 
 a {
