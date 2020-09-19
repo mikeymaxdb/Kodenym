@@ -1,0 +1,11 @@
+.Kodenym {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .gameplayContainer {
+        flex: 1;
+        text-align: center;
+        padding: 1rem;
+    }
+}

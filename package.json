@@ -1,19 +1,53 @@
 {
   "name": "kodenym",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "kodenym",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js -e js",
-    "build-css": "node-sass css/style.scss public/css/style.css",
-    "watch-css": "nodemon -e css/*.scss -x 'npm run build-css'"
+    "start": "webpack-dev-server --mode=development",
+    "start-server": "nodemon --watch server ./server/server.js",
+    "build": "webpack --mode=production"
   },
   "author": "mike o",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.6",
     "express": "^4.17.1",
-    "node-sass": "^4.13.1",
-    "nodemon": "^1.19.1",
-    "socket.io": "^2.2.0"
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "reselect": "^4.0.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.0.6",
+    "babel-preset-airbnb": "^5.0.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.1.1",
+    "css-loader": "^4.3.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-import-resolver-webpack": "^0.12.2",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "html-loader": "^1.3.0",
+    "html-webpack-plugin": "^4.4.1",
+    "nodemon": "^2.0.4",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }

@@ -1,0 +1,29 @@
+@import "style/colors";
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+    padding: 0;
+    margin:0;
+    font-family: 'Montserrat', sans-serif;
+}
+html {
+    // font-size: 100%;
+    font-size: .8vw;
+}
+
+html, body, #Root {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-image: url('/img/kodenym_bg_mono.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+a {
+    color: inherit;
+}
