@@ -19,11 +19,13 @@ export default () => {
     const store = createStore(
         createRootReducer(),
         {},
-        composeEnhancers(applyMiddleware(
-            socketMiddleware(socket),
-            locationMiddleware,
-            loggerMiddleware,
-        )),
+        composeEnhancers(
+            applyMiddleware(
+                socketMiddleware(socket),
+                locationMiddleware,
+                loggerMiddleware,
+            ),
+        ),
     )
 
     socket.on('connect', () => store.dispatch(socketConnected()))

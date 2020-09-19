@@ -9,7 +9,8 @@
     font-family: 'Montserrat', sans-serif;
 }
 html {
-    font-size: 1.1vh;
+    // font-size: 100%;
+    font-size: .8vw;
 }
 
 html, body, #Root {
@@ -18,7 +19,7 @@ html, body, #Root {
 }
 
 body {
-    background-image: url('/img/kodenym_bg@4x-100_2.jpg');
+    background-image: url('/img/kodenym_bg_mono.jpg');
     background-position: center;
     background-size: 100% 100%;
 }

@@ -22,9 +22,11 @@ module.exports = (env, argv) => ({
             template: './src/index.html',
             filename: './index.html',
         }),
-        new CopyPlugin([
-            { from: 'src/img', to: 'img' },
-        ]),
+        new CopyPlugin({
+            patterns: [
+                { from: 'src/img', to: 'img' },
+            ]
+        }),
         new webpack.DefinePlugin({
             ENV: JSON.stringify(argv.mode)
         }),
@@ -44,19 +46,23 @@ module.exports = (env, argv) => ({
                 ],
             },
             {
-                test: /\.scss$/,
+                test: /\.s[ac]ss$/i,
                 exclude: /node_modules/,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
+                    'style-loader',
                     {
-                        loader: 'sass-loader',
-                        options: {
-                            sassOptions: {
-                                includePaths: [path.resolve(__dirname, 'src')],
-                            },
-                        },
+                        loader: 'css-loader',
+                        options: { url: false },
                     },
+                    'sass-loader',
+                    // {
+                    //     loader: 'sass-loader',
+                    //     options: {
+                    //         sassOptions: {
+                    //             includePaths: [path.resolve(__dirname, 'src')],
+                    //         },
+                    //     },
+                    // },
                 ],
             },
         ],

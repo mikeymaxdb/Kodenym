@@ -1,2 +1,2 @@
-export const getHashGameId = () => window.location.hash
+export const getHashGameId = () => window.location.hash.replace('#', '')
 export default getHashGameId

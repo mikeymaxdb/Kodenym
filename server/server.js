@@ -29,7 +29,7 @@ app.use(express.static('public'));
 io.on('connection', (socket) => {
     socket.on('message', (action) => {
         const gameId = Object.values(socket.rooms).filter((room) => room !== socket.id)[0] || null
-        console.log(action)
+        // console.log(action)
 
         switch (action.type) {
             case 'JOIN_GAME': {

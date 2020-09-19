@@ -1,3 +1,5 @@
+@import 'style/colors';
+
 .JoinGame {
     height: 100%;
     display: flex;
@@ -7,9 +9,19 @@
     .joinContent {
         display: none;
 
+        img {
+            height: 15rem;
+            margin-bottom: 2rem;
+        }
         p {
-            max-width: 20rem;
+            max-width: 40rem;
             padding-bottom: 1rem;
+            font-size: 2rem;
+
+            &.description {
+                padding-top: 2rem;
+                font-size: 1.2rem;
+            }
         }
         form {
             input {
@@ -21,20 +33,24 @@
                     border: 0;
                     border-radius: 1rem;
                     padding: 1rem;
-                    font-size: 1rem;
+                    font-size: 2rem;
                     text-align: center;
                 }
                 &.submit {
                     margin-top: 1rem;
                     padding: 1rem;
-                    font-size: 1rem;
+                    font-size: 2rem;
                     border: 0;
-                    background-color: #43afcb;
-                    color: #fff;
+                    background-color: $button-bg;
+                    color: $button-fg;
                     cursor: pointer;
+                    border-radius: 1rem;
                 }
             }
         }
+    }
+    .loadingContainer {
+        font-size: 2rem;
     }
     &.connected {
         .loadingContainer {
