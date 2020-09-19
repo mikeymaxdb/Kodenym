@@ -46,6 +46,9 @@
         }
     }
     &.colorsVisible {
+        .tile {
+            pointer-events: none;
+        }
         .tile.turned {
             opacity: .3;
         }
