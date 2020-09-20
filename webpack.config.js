@@ -21,6 +21,7 @@ module.exports = (env, argv) => ({
         new CopyPlugin({
             patterns: [
                 { from: 'src/img', to: 'img' },
+                { from: 'src/font', to: 'font' },
             ]
         }),
         new webpack.DefinePlugin({

@@ -1,5 +1,13 @@
 @import "style/colors";
 
+
+@font-face {
+    font-family: Montserrat;
+    src: url('/font/Montserrat-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box; 
@@ -9,7 +17,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 html {
-    // font-size: 100%;
     font-size: .8vw;
 }
 
