@@ -68,7 +68,7 @@ const Settings = ({ settings, toggleSettings, updateSettings }) => {
                 </p>
                 <div className="buttons">
                     <button type="button" onClick={toggleSettings}>Close</button>
-                    <button type="submit" onClick={save}>Save</button>
+                    <button type="submit" onClick={save} disabled={getErrors().length}>Save</button>
                 </div>
             </div>
         </div>

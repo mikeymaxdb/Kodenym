@@ -37,4 +37,9 @@ a {
 
 button {
     cursor: pointer;
+
+    &:disabled {
+        opacity: .5;
+        cursor: disabled;
+    }
 }
