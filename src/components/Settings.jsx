@@ -22,7 +22,7 @@ const Settings = ({ settings, toggleSettings, updateSettings }) => {
         if (arrDict.length === 1) {
             arrDict = localDictionary.split(' ')
         }
-        arrDict.map((word) => word.trim()).filter((w) => !!w)
+        arrDict = arrDict.map((word) => word.trim()).filter((w) => !!w)
 
         return arrDict
     }
