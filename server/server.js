@@ -23,6 +23,10 @@ const syncClients = (gameId) => {
     io.to(gameId).emit('message', updateAction(gameData))
 }
 
+const logTime = (label, gameId) => {
+    console.log(`[${label}] [${gameId}] ${new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })}`)
+}
+
 
 app.use(express.static('public'));
 
@@ -42,6 +46,8 @@ io.on('connection', (socket) => {
                 if (!newGameId) {
                     return;
                 }
+
+                logTime('Join Game', newGameId)
 
                 // Create a new game if it doesn't exist
                 if (!gameDB[newGameId]) {
@@ -70,6 +76,8 @@ io.on('connection', (socket) => {
                 if (!gameId || !gameDB[gameId]) {
                     break;
                 }
+
+                logTime('New Game ', gameId)
 
                 gameDB[gameId].generateTiles()
 
