@@ -35,6 +35,9 @@ const JoinGame = ({ connected, joinGame }) => {
                 </form>
                 <p className="description">
                     {DESCRIPTION}
+                    <br />
+                    <br />
+                    <a href="https://github.com/mikeymaxdb/Kodenym">GitHub</a>
                 </p>
             </div>
         </div>
