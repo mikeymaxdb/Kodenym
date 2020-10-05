@@ -14,8 +14,7 @@ export const tileType = shape({
 export const tilesType = arrayOf(tileType)
 
 export const settingsType = shape({
-    columns: number.isRequired,
-    rows: number.isRequired,
+    customDictionary: arrayOf(string),
 })
 
 export const gameType = shape({

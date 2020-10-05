@@ -15,3 +15,8 @@ export const tileClick = (tileIndex) => ({
 export const newGame = () => ({
     type: types.NEW_GAME,
 })
+
+export const updateSettings = (settings) => ({
+    type: types.UPDATE_SETTINGS,
+    settings,
+})

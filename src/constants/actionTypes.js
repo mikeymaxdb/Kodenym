@@ -11,6 +11,8 @@ export const GAME_UPDATE = 'GAME_UPDATE'
 export const JOIN_GAME = 'JOIN_GAME'
 export const TILE_CLICK = 'TILE_CLICK'
 export const NEW_GAME = 'NEW_GAME'
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
 
 // UI
 export const TOGGLE_COLORS = 'TOGGLE_COLORS'
+export const TOGGLE_SETTINGS = 'TOGGLE_SETTINGS'

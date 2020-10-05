@@ -17,6 +17,16 @@ class Game {
         this._settings = {
             ...settings,
         }
+        if ('customDictionary' in this.settings) {
+            const { customDictionary } = this.settings
+            if (customDictionary && customDictionary.length && customDictionary.length >= 50) {
+                this.dictionary = customDictionary
+            } else {
+                this.dictionary = dictionaries.default
+            }
+            this.usedWords = []
+            this.generateTiles()
+        }
     }
 
     get settings() {
@@ -25,8 +35,8 @@ class Game {
 
     generateNextWord() {
         const len = this.dictionary.length
-        while(true) {
-            const candidate = dictionaries.default[Math.floor(Math.random() * len)]
+        while (true) {
+            const candidate = this.dictionary[Math.floor(Math.random() * len)]
             if (!this.usedWords.includes(candidate)) {
                 this.usedWords.push(candidate)
                 return candidate

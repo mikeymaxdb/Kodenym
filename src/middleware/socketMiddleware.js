@@ -15,6 +15,7 @@ const socketMiddleware = (socket) => (store) => (next) => (action) => {
         case types.JOIN_GAME:
         case types.TILE_CLICK:
         case types.NEW_GAME:
+        case types.UPDATE_SETTINGS:
             socket.emit('message', action)
             break
         case types.SOCKET_MESSAGE:

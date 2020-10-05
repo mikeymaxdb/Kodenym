@@ -4,4 +4,6 @@ export const toggleColors = () => ({
     type: types.TOGGLE_COLORS,
 })
 
-export default toggleColors
+export const toggleSettings = () => ({
+    type: types.TOGGLE_SETTINGS,
+})

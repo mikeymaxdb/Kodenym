@@ -33,9 +33,21 @@
         .logo {
             flex: 1;
             position: relative;
+            display: flex;
+            align-items: center;
 
             img {
                 height: 6rem;
+            }
+            button {
+                border: 0;
+                background-color: transparent;
+                margin-left: 2rem;
+                height: 3rem;
+
+                img {
+                    height: 100%;
+                }
             }
         }
         .score {

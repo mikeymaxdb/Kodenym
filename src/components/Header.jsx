@@ -12,6 +12,7 @@ const Header = ({
     isSpymaster,
     score,
     toggleColors,
+    toggleSettings,
     newGame,
 }) => (
     <div className={`Header ${hasGame ? 'hasGame' : ''}`}>
@@ -25,6 +26,9 @@ const Header = ({
                 <a href="/">
                     <img src="/img/kodenym_logo.svg" alt="kodenym logo" />
                 </a>
+                <button type="button" onClick={toggleSettings}>
+                    <img src="/img/settings.svg" alt="settings gear icon" />
+                </button>
             </div>
             {score ? (
                 <div className="score">
@@ -52,6 +56,7 @@ Header.propTypes = {
     isSpymaster: bool.isRequired,
     score: scoreType,
     toggleColors: func.isRequired,
+    toggleSettings: func.isRequired,
     newGame: func.isRequired,
 }
 

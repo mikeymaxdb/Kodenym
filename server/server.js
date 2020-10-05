@@ -82,6 +82,33 @@ io.on('connection', (socket) => {
 
                 gameDB[gameId].onTileClick(action.tileIndex);
                 break;
+            case 'UPDATE_SETTINGS':
+                if (!gameId) {
+                    break;
+                }
+                if (action.settings) {
+                    const { settings } = action
+                    if (settings) {
+                        const newSettings = {}
+                        if ('customDictionary' in settings) {
+                            const { customDictionary } = settings
+                            if (!Array.isArray(customDictionary)) {
+                                newSettings.customDictionary = null
+                            } else {
+                                let cleanDictionary = customDictionary.map((dw) => {
+                                    let word = dw.trim();
+                                    word = word.substring(0, 20);
+                                    word = word.trim();
+                                    return word
+                                }).filter((w) => !!w);
+                                cleanDictionary = cleanDictionary.slice(0, 700);
+                                newSettings.customDictionary = cleanDictionary
+                            }
+                        }
+                        gameDB[gameId].settings = newSettings
+                    }
+                }
+                break;
             default:
                 break;
         }

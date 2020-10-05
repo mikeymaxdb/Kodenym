@@ -4,6 +4,7 @@ const initialState = {
     isSpymaster: false,
     socketConnected: false,
     hasGame: false,
+    settingsOpen: false,
 }
 
 const ui = (state = initialState, action) => {
@@ -27,6 +28,16 @@ const ui = (state = initialState, action) => {
             return {
                 ...state,
                 isSpymaster: !state.isSpymaster,
+            }
+        case types.GAME_NEW:
+            return {
+                ...state,
+                isSpymaster: false,
+            }
+        case types.TOGGLE_SETTINGS:
+            return {
+                ...state,
+                settingsOpen: !state.settingsOpen,
             }
         default:
             return state

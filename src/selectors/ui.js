@@ -4,6 +4,7 @@ import { getTiles } from 'selectors/game'
 export const getSocketConnected = (state) => state.ui.socketConnected
 export const getHasGame = (state) => state.ui.hasGame
 export const getIsSpymaster = (state) => state.ui.isSpymaster
+export const getSettingsOpen = (state) => state.ui.settingsOpen
 
 export const getScore = createSelector(
     getTiles,

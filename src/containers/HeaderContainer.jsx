@@ -11,7 +11,7 @@ import {
     getScore,
 } from 'selectors/ui'
 import { getGameId } from 'selectors/game'
-import { toggleColors } from 'actions/uiActions'
+import { toggleColors, toggleSettings } from 'actions/uiActions'
 import { newGame } from 'actions/gameActions'
 
 import Header from 'components/Header'
@@ -23,6 +23,7 @@ const HeaderContainer = ({
     isSpymaster,
     score,
     onToggleColors,
+    onToggleSettings,
     onNewGame,
 }) => (
     <Header
@@ -32,6 +33,7 @@ const HeaderContainer = ({
         isSpymaster={isSpymaster}
         score={score}
         toggleColors={onToggleColors}
+        toggleSettings={onToggleSettings}
         newGame={onNewGame}
     />
 )
@@ -47,6 +49,7 @@ HeaderContainer.propTypes = {
     isSpymaster: bool.isRequired,
     score: scoreType,
     onToggleColors: func.isRequired,
+    onToggleSettings: func.isRequired,
     onNewGame: func.isRequired,
 }
 
@@ -60,6 +63,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onToggleColors: () => dispatch(toggleColors()),
+    onToggleSettings: () => dispatch(toggleSettings()),
     onNewGame: () => dispatch(newGame()),
 })
 
